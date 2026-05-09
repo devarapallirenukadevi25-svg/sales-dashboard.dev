@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Analytics | Food Delivery Dashboard</title>
+    <meta name="description" content="Modern AI-Powered Food Delivery Sales Analytics Dashboard">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <i class="ph-fill ph-planet"></i>
+                    <span class="logo-text">Nova<strong>Eats</strong></span>
+                </div>
+                <button class="toggle-btn" id="sidebar-toggle">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <p class="nav-title">MAIN MENU</p>
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-squares-four"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-receipt"></i>
+                            <span>Orders</span>
+                            <span class="badge">12</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-storefront"></i>
+                            <span>Restaurants</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-moped"></i>
+                            <span>Delivery</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-users"></i>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-chart-line-up"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <p class="nav-title">PREFERENCES</p>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-question"></i>
+                            <span>Help Center</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="ai-status">
+                    <div class="pulse-dot"></div>
+                    <span>AI Engine Active</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title">Overview</h1>
+                    <p class="page-subtitle">Welcome back! Here's today's AI summary.</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="search-bar">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Search orders, restaurants...">
+                        <div class="shortcut-key">⌘K</div>
+                    </div>
+                    
+                    <div class="date-filter">
+                        <i class="ph ph-calendar-blank"></i>
+                        <span>Today, Oct 24</span>
+                        <i class="ph ph-caret-down"></i>
+                    </div>
+
+                    <div class="header-actions">
+                        <button class="icon-btn notification-btn">
+                            <i class="ph ph-bell"></i>
+                            <span class="notification-dot"></span>
+                        </button>
+                        <div class="profile-dropdown">
+                            <img src="https://i.pravatar.cc/150?img=32" alt="User Avatar" class="avatar">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                
+                <!-- KPI Cards -->
+                <section class="kpi-grid">
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <div class="kpi-icon-wrap purple-glow">
+                                <i class="ph ph-currency-dollar"></i>
+                            </div>
+                            <span class="trend positive">
+                                <i class="ph ph-trend-up"></i> +14.5%
+                            </span>
+                        </div>
+                        <div class="kpi-body">
+                            <h3 class="kpi-value">$24,892</h3>
+                            <p class="kpi-label">Total Revenue</p>
+                        </div>
+                        <div class="kpi-chart" id="spark1"></div>
+                    </div>
+
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <div class="kpi-icon-wrap orange-glow">
+                                <i class="ph ph-shopping-bag"></i>
+                            </div>
+                            <span class="trend positive">
+                                <i class="ph ph-trend-up"></i> +8.2%
+                            </span>
+                        </div>
+                        <div class="kpi-body">
+                            <h3 class="kpi-value">1,482</h3>
+                            <p class="kpi-label">Total Orders</p>
+                        </div>
+                        <div class="kpi-chart" id="spark2"></div>
+                    </div>
+
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <div class="kpi-icon-wrap blue-glow">
+                                <i class="ph ph-moped"></i>
+                            </div>
+                            <span class="trend negative">
+                                <i class="ph ph-trend-down"></i> -2.4%
+                            </span>
+                        </div>
+                        <div class="kpi-body">
+                            <h3 class="kpi-value">342</h3>
+                            <p class="kpi-label">Active Deliveries</p>
+                        </div>
+                        <div class="kpi-chart" id="spark3"></div>
+                    </div>
+
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <div class="kpi-icon-wrap green-glow">
+                                <i class="ph ph-star"></i>
+                            </div>
+                            <span class="trend positive">
+                                <i class="ph ph-trend-up"></i> +4.1%
+                            </span>
+                        </div>
+                        <div class="kpi-body">
+                            <h3 class="kpi-value">4.9/5</h3>
+                            <p class="kpi-label">Customer Satisfaction</p>
+                        </div>
+                        <div class="kpi-chart" id="spark4"></div>
+                    </div>
+                </section>
+
+                <!-- Charts Section 1 -->
+                <section class="charts-grid-main">
+                    <div class="chart-container glass-panel span-2">
+                        <div class="chart-header">
+                            <div>
+                                <h2 class="chart-title">Hourly Orders Trend</h2>
+                                <p class="chart-subtitle">Real-time AI prediction vs Actual</p>
+                            </div>
+                            <button class="icon-btn"><i class="ph ph-dots-three"></i></button>
+                        </div>
+                        <div id="hourlyOrdersChart" class="chart-area"></div>
+                    </div>
+
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <div>
+                                <h2 class="chart-title">Top Restaurants</h2>
+                                <p class="chart-subtitle">By Revenue Generated</p>
+                            </div>
+                            <button class="icon-btn"><i class="ph ph-dots-three"></i></button>
+                        </div>
+                        <div id="topRestaurantsChart" class="chart-area"></div>
+                    </div>
+                </section>
+
+                <!-- Charts Section 2 -->
+                <section class="charts-grid-secondary">
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <div>
+                                <h2 class="chart-title">Order Status</h2>
+                                <p class="chart-subtitle">Current distribution</p>
+                            </div>
+                        </div>
+                        <div id="orderStatusChart" class="chart-area"></div>
+                    </div>
+
+                    <div class="chart-container glass-panel span-2">
+                        <div class="chart-header">
+                            <div>
+                                <h2 class="chart-title">Revenue vs Refunds</h2>
+                                <p class="chart-subtitle">Financial Overview</p>
+                            </div>
+                        </div>
+                        <div id="revenueRefundsChart" class="chart-area"></div>
+                    </div>
+                    
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <div>
+                                <h2 class="chart-title">Delivery Hotspots</h2>
+                                <p class="chart-subtitle">High demand areas</p>
+                            </div>
+                        </div>
+                        <div id="heatmapChart" class="chart-area"></div>
+                    </div>
+                </section>
+
+                <!-- Bottom Section: Table & Live Activity -->
+                <section class="bottom-grid">
+                    <div class="table-container glass-panel span-2">
+                        <div class="table-header">
+                            <h2 class="chart-title">Recent Orders</h2>
+                            <div class="table-actions">
+                                <button class="btn-outline"><i class="ph ph-funnel"></i> Filter</button>
+                                <button class="btn-primary">View All</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="modern-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Restaurant</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#ORD-8924</td>
+                                        <td>
+                                            <div class="user-info">
+                                                <img src="https://i.pravatar.cc/150?img=12" alt="Alex">
+                                                <span>Alex M.</span>
+                                            </div>
+                                        </td>
+                                        <td>Burger Hub</td>
+                                        <td>$42.50</td>
+                                        <td><span class="badge badge-success">Delivered</span></td>
+                                        <td>2 mins ago</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-8923</td>
+                                        <td>
+                                            <div class="user-info">
+                                                <img src="https://i.pravatar.cc/150?img=5" alt="Sarah">
+                                                <span>Sarah K.</span>
+                                            </div>
+                                        </td>
+                                        <td>Sushi Town</td>
+                                        <td>$115.00</td>
+                                        <td><span class="badge badge-warning">Preparing</span></td>
+                                        <td>5 mins ago</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-8922</td>
+                                        <td>
+                                            <div class="user-info">
+                                                <img src="https://i.pravatar.cc/150?img=68" alt="David">
+                                                <span>David R.</span>
+                                            </div>
+                                        </td>
+                                        <td>Pizza Point</td>
+                                        <td>$28.90</td>
+                                        <td><span class="badge badge-info">On the way</span></td>
+                                        <td>12 mins ago</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-8921</td>
+                                        <td>
+                                            <div class="user-info">
+                                                <img src="https://i.pravatar.cc/150?img=44" alt="Emma">
+                                                <span>Emma W.</span>
+                                            </div>
+                                        </td>
+                                        <td>Urban Biryani</td>
+                                        <td>$65.20</td>
+                                        <td><span class="badge badge-error">Cancelled</span></td>
+                                        <td>18 mins ago</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-8920</td>
+                                        <td>
+                                            <div class="user-info">
+                                                <img src="https://i.pravatar.cc/150?img=33" alt="James">
+                                                <span>James L.</span>
+                                            </div>
+                                        </td>
+                                        <td>Food Factory</td>
+                                        <td>$34.00</td>
+                                        <td><span class="badge badge-success">Delivered</span></td>
+                                        <td>24 mins ago</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="live-activity-container glass-panel">
+                        <div class="chart-header">
+                            <h2 class="chart-title">Live Activity</h2>
+                            <div class="ai-badge">AI Monitored</div>
+                        </div>
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-icon info-bg">
+                                    <i class="ph ph-moped"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text"><strong>Rider assigned</strong> for #ORD-8923</p>
+                                    <span class="activity-time">Just now</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon success-bg">
+                                    <i class="ph ph-star"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text"><strong>5-star rating</strong> from Alex M.</p>
+                                    <span class="activity-time">2 mins ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon warning-bg">
+                                    <i class="ph ph-fire"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text"><strong>High demand</strong> in Downtown area</p>
+                                    <span class="activity-time">10 mins ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon error-bg">
+                                    <i class="ph ph-arrow-u-up-left"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text"><strong>Refund requested</strong> by Emma W.</p>
+                                    <span class="activity-time">18 mins ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon success-bg">
+                                    <i class="ph ph-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p class="activity-text"><strong>Batch #42 delivered</strong> successfully</p>
+                                    <span class="activity-time">30 mins ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>
